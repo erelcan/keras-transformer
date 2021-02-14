@@ -1,0 +1,106 @@
+{
+  "outer_generator_info": {
+    "batch_size": 32,
+    "zip_file_path": "../data/spa-eng.zip",
+    "file_url": "http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip",
+    "extraction_path": "/spa-eng/spa.txt",
+    "num_of_samples": 10000,
+    "shuffle_on": true
+  },
+  "trainer_info": {
+    "domain_info": {
+      "encoder": {
+        "max_seq_len": 250,
+        "vocabulary_size": 100001,
+        "input_type": "int64"
+      },
+      "decoder": {
+        "max_seq_len": 280,
+        "vocabulary_size": 100001,
+        "input_type": "int64"
+      }
+    },
+    "processor_info": {
+      "type": "SubWordProcessor",
+      "parameters": {
+        "bpe_info": {
+          "shared_bpe": {
+              "lang": "multi",
+              "add_pad_emb": true,
+              "vs": 100000
+          }
+        },
+        "padding_info": {
+          "enc_max_seq_len": 250,
+          "dec_max_seq_len": 280
+        }
+      }
+    },
+    "generator_info": {
+      "use_remaining": true
+    },
+    "model_info": {
+      "d_model": 300,
+      "num_of_blocks": 6,
+      "embedding_info": {
+        "weight_sharing": "all",
+        "weight_path": null,
+        "vocabulary_size": 100001,
+        "embedding_length": 300,
+        "is_trainable": false
+      },
+      "attention_info": {
+        "head_num": 5,
+        "dropout_rate": 0.1
+      },
+      "pff_info": {
+        "inner_length": 600,
+        "dropout_rate": 0.1
+      },
+      "input_dropout_rates": {
+        "encoder": 0.1,
+        "decoder": 0.1
+      },
+      "return_logits": false,
+      "mask_value": 100000,
+      "optimizer_info": {
+        "type": "Adam",
+        "parameters": {
+          "beta_1": 0.9,
+          "beta_2": 0.98,
+          "epsilon": 1e-9
+        }
+      },
+      "loss_info": {
+        "type": "custom_crossentropy",
+        "parameters": {
+          "num_classes": 100001,
+          "mask_value": 100000,
+          "from_logits": false,
+          "label_smoothing": 0.1
+        }
+      },
+      "callback_info": [
+        {
+          "type": "TensorBoard",
+          "parameters": {
+            "log_dir": "../workspace/logs"
+          }
+        },
+        {
+          "type": "CustomLearningRateScheduler",
+          "parameters": {
+            "d_model": 300,
+            "warmup_steps": 4000
+          }
+        }
+      ],
+      "fit_parameters": {
+        "epochs": 10
+      }
+    },
+    "checkpointing_info": {
+      "workspace_path": "../workspace/"
+    }
+  }
+}

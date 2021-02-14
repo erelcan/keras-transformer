@@ -1,0 +1,130 @@
+{
+  "outer_generator_info": {
+    "batch_size": 32,
+    "zip_file_path": "../data/spa-eng.zip",
+    "file_url": "http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip",
+    "extraction_path": "/spa-eng/spa.txt",
+    "num_of_samples": 15000,
+    "shuffle_on": true
+  },
+  "trainer_info": {
+    "domain_info": {
+      "encoder": {
+        "max_seq_len": 22,
+        "vocabulary_size": 10001,
+        "input_type": "int64"
+      },
+      "decoder": {
+        "max_seq_len": 51,
+        "vocabulary_size": 10001,
+        "input_type": "int64"
+      }
+    },
+    "processor_info": {
+      "type": "SubWordProcessor",
+      "parameters": {
+        "bpe_info": {
+          "encoder_bpe": {
+              "lang": "en",
+              "add_pad_emb": true,
+              "vs": 10000,
+              "dim": 100
+          },
+          "decoder_bpe": {
+              "lang": "es",
+              "add_pad_emb": true,
+              "vs": 10000,
+              "dim": 100
+          }
+        },
+        "padding_info": {
+          "enc_max_seq_len": 22,
+          "dec_max_seq_len": 51
+        }
+      }
+    },
+    "generator_info": {
+      "use_remaining": true
+    },
+    "model_info": {
+      "d_model": 100,
+      "num_of_blocks": 1,
+      "embedding_info": {
+        "weight_sharing": "decoder_projector_only",
+        "encoder": {
+          "weight_info": {
+            "type": "bpe",
+            "parameters": {
+              "lang": "en",
+              "vs": 10000,
+              "dim": 100,
+              "weight_path": null
+            }
+          },
+          "vocabulary_size": 10001,
+          "embedding_length": 100,
+          "is_trainable": false
+        },
+        "decoder": {
+          "weight_info": {
+            "type": "bpe",
+            "parameters": {
+              "lang": "es",
+              "vs": 10000,
+              "dim": 100,
+              "weight_path": null
+            }
+          },
+          "vocabulary_size": 10001,
+          "embedding_length": 100,
+          "is_trainable": false
+        }
+      },
+      "attention_info": {
+        "head_num": 5,
+        "dropout_rate": 0.1
+      },
+      "pff_info": {
+        "inner_length": 200,
+        "dropout_rate": 0.1
+      },
+      "input_dropout_rates": {
+        "encoder": 0.1,
+        "decoder": 0.1
+      },
+      "return_logits": false,
+      "mask_value": 10000,
+      "optimizer_info": {
+        "type": "Adam",
+        "parameters": {
+          "beta_1": 0.9,
+          "beta_2": 0.98,
+          "epsilon": 1e-9
+        }
+      },
+      "loss_info": {
+        "type": "custom_crossentropy",
+        "parameters": {
+          "num_classes": 10001,
+          "mask_value": 10000,
+          "from_logits": false,
+          "label_smoothing": 0.1
+        }
+      },
+      "callback_info": [
+        {
+          "type": "TensorBoard",
+          "parameters": {
+            "log_dir": "../workspace/logs"
+          }
+        }
+      ],
+      "fit_parameters": {
+        "epochs": 1
+      }
+    },
+    "checkpointing_info": {
+      "workspace_path": "../workspace"
+    }
+  }
+}

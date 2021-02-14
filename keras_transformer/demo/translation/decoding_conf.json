@@ -1,0 +1,6 @@
+{
+  "model_path": "../model.h5",
+  "artifacts_path": "../artifacts.pkl",
+  "num_of_candidates": 10,
+  "beam_width": 10
+}
