@@ -370,6 +370,30 @@ Trainers need to implement _get_model and train.
 - We may consider moving train fucntion to TrainerABC in the future.
 
 
+## Model and Callback Serialization
+
+Custom objects must be loaded when keras model is being loaded.
+- We keep custom layer info at custom_layers.py.
+  - We retrieve the required ones and put them to artifacts.
+  - They will be used to retrieve required info from custom_layers.py when custom_objects are being created on model load.
+  - custom_object_handler.py is responsible to create custom objects that are required on model load by utilizing the information kept in the artifacts.
+  - For now, we allow creating custom layers and custom losses on model load.
+    - In case, just add required creators to custom_object_handler and keep required information in the artifacts.
+- It is crucial to save callback state when a callback requires historical data (or it is not stateless).
+  - We can't just pickle callbacks due to weak references etc.
+  - Hence, we only keep the state information (as long as they are pickable).
+  - Then, we create callback after load and initialize with the state information kept in the artifacts.
+  - Each stateful callback must implement get_name, get_artifacts and prepare_from_artifacts methods.
+  - If we would like to use an existing callback (e.g. Keras builtin callbacks etc.) which is stateful; then we can wrap them.
+    - We need to implement the required methods and ensure to keep the state information.
+- We have CustomCheckpointer to create model and artifact checkpoints.
+  - It extends ModelCheckpoint and CustomCallbackABC.
+    - Hence, it has the capabilities of both ModelCheckpoint and our custom callback interface.
+    - We delegate model saving task to ModelCheckpoint, and handle artifact saving accordingly in the custom checkpointer.
+  - Saving artifacts along with the model checkpoints allow us to continue training gracefully.
+    - Since stateful objects are carried to new session of the training.
+
+
 ## Demo
 
 A demo is prepared for machine translation.
