@@ -38,5 +38,5 @@ def create_callbacks(callbacks_info, callback_artifacts, return_custom_callbacks
 
 
 _custom_callbacks = {
-    "CustomLearningRateScheduler": {"module": "keras_transformer.training.CustomLearningRateScheduler", "class_name": "CustomLearningRateScheduler"}
+    "CustomLearningRateScheduler": {"module": "keras_transformer.training.custom_callbacks.CustomLearningRateScheduler", "class_name": "CustomLearningRateScheduler"}
 }

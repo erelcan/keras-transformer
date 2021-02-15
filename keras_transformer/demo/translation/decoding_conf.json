@@ -1,6 +1,6 @@
 {
-  "model_path": "../model.h5",
-  "artifacts_path": "../artifacts.pkl",
+  "model_path": "/home/matrixengineer/ALL/Science/Engineering/Projects/ML/KerasTransformer/scratch_space/temp2/model.h5",
+  "artifacts_path": "/home/matrixengineer/ALL/Science/Engineering/Projects/ML/KerasTransformer/scratch_space/temp2/artifacts.pkl",
   "num_of_candidates": 10,
   "beam_width": 10
 }

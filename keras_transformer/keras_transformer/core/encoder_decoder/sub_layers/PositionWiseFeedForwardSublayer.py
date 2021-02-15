@@ -1,5 +1,5 @@
 from keras.layers import Layer, Dense, Add, Dropout
-from keras_transformer.core.encoder_decoder.misc.LayerNormalization import LayerNormalization
+from keras_transformer.core.encoder_decoder.normalization.LayerNormalization import LayerNormalization
 
 
 class PositionWiseFeedForwardSublayer(Layer):

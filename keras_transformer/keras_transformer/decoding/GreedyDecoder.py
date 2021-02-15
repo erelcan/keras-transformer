@@ -1,7 +1,7 @@
 import numpy as np
 from keras.preprocessing.sequence import pad_sequences
 
-from keras_transformer.core.decoding.DecoderABC import DecoderABC
+from keras_transformer.decoding.DecoderABC import DecoderABC
 
 
 class GreedyDecoder(DecoderABC):

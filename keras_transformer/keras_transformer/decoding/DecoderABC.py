@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from keras.models import load_model
 
 from keras_transformer.utils.io_utils import load_from_pickle
-from keras_transformer.training.aux.custom_object_handler import prepare_custom_objects
+from keras_transformer.training.custom_serialization.custom_object_handler import prepare_custom_objects
 
 
 class DecoderABC(ABC):

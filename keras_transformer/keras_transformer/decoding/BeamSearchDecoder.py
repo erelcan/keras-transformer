@@ -2,7 +2,7 @@ import numpy as np
 import math
 from keras.preprocessing.sequence import pad_sequences
 
-from keras_transformer.core.decoding.DecoderABC import DecoderABC
+from keras_transformer.decoding.DecoderABC import DecoderABC
 from keras_transformer.utils.common_utils import get_topk_with_indices
 
 

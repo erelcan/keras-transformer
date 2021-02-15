@@ -10,12 +10,12 @@
   "trainer_info": {
     "domain_info": {
       "encoder": {
-        "max_seq_len": 22,
+        "max_seq_len": 64,
         "vocabulary_size": 10001,
         "input_type": "int64"
       },
       "decoder": {
-        "max_seq_len": 51,
+        "max_seq_len": 64,
         "vocabulary_size": 10001,
         "input_type": "int64"
       }
@@ -28,18 +28,18 @@
               "lang": "en",
               "add_pad_emb": true,
               "vs": 10000,
-              "dim": 100
+              "dim": 50
           },
           "decoder_bpe": {
               "lang": "es",
               "add_pad_emb": true,
               "vs": 10000,
-              "dim": 100
+              "dim": 50
           }
         },
         "padding_info": {
-          "enc_max_seq_len": 22,
-          "dec_max_seq_len": 51
+          "enc_max_seq_len": 64,
+          "dec_max_seq_len": 64
         }
       }
     },
@@ -47,8 +47,8 @@
       "use_remaining": true
     },
     "model_info": {
-      "d_model": 100,
-      "num_of_blocks": 1,
+      "d_model": 50,
+      "num_of_blocks": 2,
       "embedding_info": {
         "weight_sharing": "decoder_projector_only",
         "encoder": {
@@ -57,12 +57,12 @@
             "parameters": {
               "lang": "en",
               "vs": 10000,
-              "dim": 100,
+              "dim": 50,
               "weight_path": null
             }
           },
           "vocabulary_size": 10001,
-          "embedding_length": 100,
+          "embedding_length": 50,
           "is_trainable": false
         },
         "decoder": {
@@ -71,12 +71,12 @@
             "parameters": {
               "lang": "es",
               "vs": 10000,
-              "dim": 100,
+              "dim": 50,
               "weight_path": null
             }
           },
           "vocabulary_size": 10001,
-          "embedding_length": 100,
+          "embedding_length": 50,
           "is_trainable": false
         }
       },
@@ -85,7 +85,7 @@
         "dropout_rate": 0.1
       },
       "pff_info": {
-        "inner_length": 200,
+        "inner_length": 100,
         "dropout_rate": 0.1
       },
       "input_dropout_rates": {
@@ -117,14 +117,23 @@
           "parameters": {
             "log_dir": "../workspace/logs"
           }
+        },
+        {
+          "is_custom": true,
+          "type": "CustomLearningRateScheduler",
+          "parameters": {
+            "d_model": 300,
+            "warmup_steps": 10
+          }
         }
       ],
       "fit_parameters": {
-        "epochs": 1
+        "epochs": 3
       }
     },
     "checkpointing_info": {
-      "workspace_path": "../workspace"
+      "workspace_path": "../workspace/",
+      "continue_from": 2
     }
   }
 }

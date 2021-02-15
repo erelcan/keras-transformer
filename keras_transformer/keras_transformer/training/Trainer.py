@@ -3,7 +3,7 @@ from keras.models import Model
 
 from keras_transformer.training.TrainerABC import TrainerABC
 from keras_transformer.core.Transformer import Transformer
-from keras_transformer.training.aux.custom_layers import get_basic_custom_layer_names
+from keras_transformer.training.custom_serialization.custom_layers import get_basic_custom_layer_names
 from keras_transformer.processors.processor_factory import create_processor
 
 

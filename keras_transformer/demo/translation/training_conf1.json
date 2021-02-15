@@ -88,6 +88,7 @@
           }
         },
         {
+          "is_custom": true,
           "type": "CustomLearningRateScheduler",
           "parameters": {
             "d_model": 300,

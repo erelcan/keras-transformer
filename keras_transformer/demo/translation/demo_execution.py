@@ -1,7 +1,7 @@
 from demo.translation.TranslationDataGenerator import TranslationDataGenerator
 from keras_transformer.training.Trainer import Trainer
-from keras_transformer.core.decoding.BeamSearchDecoder import BeamSearchDecoder
-from keras_transformer.core.decoding.GreedyDecoder import GreedyDecoder
+from keras_transformer.decoding.BeamSearchDecoder import BeamSearchDecoder
+from keras_transformer.decoding.GreedyDecoder import GreedyDecoder
 from keras_transformer.utils.io_utils import read_json
 
 
@@ -31,7 +31,7 @@ def execute_demo():
     samples = read_json("./samples.json")
 
     train_model(training_conf)
-    # decode_samples(decoding_conf, samples)
+    decode_samples(decoding_conf, samples)
 
 
 execute_demo()

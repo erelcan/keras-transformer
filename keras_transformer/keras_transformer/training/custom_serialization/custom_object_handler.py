@@ -1,4 +1,4 @@
-from keras_transformer.training.aux.custom_layers import get_custom_layer_class
+from keras_transformer.training.custom_serialization.custom_layers import get_custom_layer_class
 from keras_transformer.training.factories.loss_factory import create_loss_function
 
 

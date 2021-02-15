@@ -10,7 +10,7 @@ from keras_transformer.core.encoder_decoder.DecoderBlockStack import DecoderBloc
 from keras_transformer.core.encoder_decoder.EncoderDecoder import EncoderDecoder
 from keras_transformer.core.encoder_decoder.sub_layers.PositionWiseFeedForwardSublayer import PositionWiseFeedForwardSublayer
 from keras_transformer.core.encoder_decoder.sub_layers.SelfAttentionSublayer import SelfAttentionSublayer
-from keras_transformer.core.encoder_decoder.misc.LayerNormalization import LayerNormalization
+from keras_transformer.core.encoder_decoder.normalization.LayerNormalization import LayerNormalization
 from keras_transformer.core.TiedEmbedderProjector import TiedEmbedderProjector
 
 
