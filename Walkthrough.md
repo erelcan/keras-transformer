@@ -10,17 +10,14 @@
     - tq: sequence length for query
     - tk: sequence length for key
     - tv: sequence length for value
+    - tq_D: sequence length for queries on decoder
   - f: feature length
     - fE: feature length for encoder input
     - fD: feature length for decoder input
     - fq: feature length for query
     - fk: feature length for key
     - fv: feature length for value
-    - fhq: feature length per head for query
-    - fhk: feature length per head for key
-    - fhv: feature length per head for value
-  - To specify lengths for encoder and decoder, subscript them with E or D (e.g. tq_E, tq_D).
-  - h: number of heads
+    - fv_E: feature length for values on encoder
   - embE: embedding length for encoder
   - embD: embedding length for decoder
 
