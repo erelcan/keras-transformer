@@ -1,5 +1,5 @@
 from keras_transformer.training.custom_serialization.custom_layers import get_custom_layer_class
-from keras_transformer.training.factories.loss_factory import create_loss_function
+from keras_transformer.training.factories.loss_factory import create_loss
 
 
 def prepare_custom_objects(custom_object_info):
@@ -17,4 +17,4 @@ def _prepare_custom_layers(layer_info):
 
 
 def _prepare_custom_loss(loss_info):
-    return {"loss": create_loss_function(loss_info)}
+    return {"loss": create_loss(loss_info)}

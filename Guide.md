@@ -187,6 +187,14 @@ The most common way to handle parameter tying along with a projection layer (a l
 - Masking and loss function: [45, 47]
 - How to test a custom loss function: [48]
 
+Crucial for custom loss serialization:
+- If we have custom losses, we must add them to custom objects when loading a saved model.
+- However, the key string must be the same as the corresponding function name!!!
+- Otherwise, the loss function couldn't be found!
+- For inference purposes, we may load with compile=False. Then, compile without loss and optimizer.
+- However, if we would like to resume training, we need the saved optimizer state.
+  - Therefore, we must compile on load and let the loader to load the optimizer state.
+
 If your targets are one-hot encoded, use categorical_crossentropy. But if your targets are integers, use sparse_categorical_crossentropy.
 
 Since the target sequences are padded, it is important to apply a padding mask when calculating the loss. Please check [45] for padding aware softmax.

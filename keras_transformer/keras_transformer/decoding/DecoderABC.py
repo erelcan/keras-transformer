@@ -19,9 +19,7 @@ class DecoderABC(ABC):
         pass
 
     def _load_model(self, model_path):
-        model = load_model(model_path, custom_objects=prepare_custom_objects(self._artifacts["custom_objects_info"]), compile=False)
-        model.compile()
-        return model
+        return load_model(model_path, custom_objects=prepare_custom_objects(self._artifacts["custom_objects_info"]))
 
     @staticmethod
     def _load_artifacts(artifacts_path):

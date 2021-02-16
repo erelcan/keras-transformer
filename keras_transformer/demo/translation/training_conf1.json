@@ -72,6 +72,7 @@
         }
       },
       "loss_info": {
+        "is_custom": true,
         "type": "custom_crossentropy",
         "parameters": {
           "num_classes": 100001,

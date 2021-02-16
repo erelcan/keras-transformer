@@ -1,7 +1,7 @@
 {
   "outer_generator_info": {
     "batch_size": 32,
-    "zip_file_path": "../data/spa-eng.zip",
+    "zip_file_path": "..data/spa-eng.zip",
     "file_url": "http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip",
     "extraction_path": "/spa-eng/spa.txt",
     "num_of_samples": 15000,
@@ -11,12 +11,12 @@
     "domain_info": {
       "encoder": {
         "max_seq_len": 64,
-        "vocabulary_size": 10001,
+        "vocabulary_size": 1001,
         "input_type": "int64"
       },
       "decoder": {
         "max_seq_len": 64,
-        "vocabulary_size": 10001,
+        "vocabulary_size": 1001,
         "input_type": "int64"
       }
     },
@@ -27,13 +27,13 @@
           "encoder_bpe": {
               "lang": "en",
               "add_pad_emb": true,
-              "vs": 10000,
+              "vs": 1000,
               "dim": 50
           },
           "decoder_bpe": {
               "lang": "es",
               "add_pad_emb": true,
-              "vs": 10000,
+              "vs": 1000,
               "dim": 50
           }
         },
@@ -56,12 +56,12 @@
             "type": "bpe",
             "parameters": {
               "lang": "en",
-              "vs": 10000,
+              "vs": 1000,
               "dim": 50,
               "weight_path": null
             }
           },
-          "vocabulary_size": 10001,
+          "vocabulary_size": 1001,
           "embedding_length": 50,
           "is_trainable": false
         },
@@ -70,12 +70,12 @@
             "type": "bpe",
             "parameters": {
               "lang": "es",
-              "vs": 10000,
+              "vs": 1000,
               "dim": 50,
               "weight_path": null
             }
           },
-          "vocabulary_size": 10001,
+          "vocabulary_size": 1001,
           "embedding_length": 50,
           "is_trainable": false
         }
@@ -93,7 +93,7 @@
         "decoder": 0.1
       },
       "return_logits": false,
-      "mask_value": 10000,
+      "mask_value": 1000,
       "optimizer_info": {
         "type": "Adam",
         "parameters": {
@@ -103,10 +103,11 @@
         }
       },
       "loss_info": {
+        "is_custom": true,
         "type": "custom_crossentropy",
         "parameters": {
-          "num_classes": 10001,
-          "mask_value": 10000,
+          "num_classes": 1001,
+          "mask_value": 1000,
           "from_logits": false,
           "label_smoothing": 0.1
         }
@@ -119,21 +120,22 @@
           }
         },
         {
-          "is_custom": true,
-          "type": "CustomLearningRateScheduler",
+          "type": "ReduceLROnPlateau",
           "parameters": {
-            "d_model": 300,
-            "warmup_steps": 10
+            "monitor": "loss",
+            "factor": 0.9,
+            "patience": 5,
+            "min_delta": 0.001,
+            "min_lr": 0.0001
           }
         }
       ],
       "fit_parameters": {
-        "epochs": 3
+        "epochs": 100
       }
     },
     "checkpointing_info": {
-      "workspace_path": "../workspace/",
-      "continue_from": 2
+      "workspace_path": "../workspace"
     }
   }
 }

@@ -8,6 +8,12 @@ def get_class_instance_by_name(module_name, class_name, class_args):
     return my_class
 
 
+def get_function_by_name(module_name, function_name):
+    module = __import__(module_name, fromlist=[''])
+    my_function = getattr(module, function_name)
+    return my_function
+
+
 def select_items(given_list, indices):
     if len(indices) == 1:
         return [given_list[indices[0]]]
